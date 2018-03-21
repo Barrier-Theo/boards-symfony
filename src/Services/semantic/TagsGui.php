@@ -16,27 +16,31 @@ class TagsGui extends SemanticGui{
 			$lbl->setColor($tag->getColor());
 			return $lbl;
 		});
-		$dt->addEditButton(true,["ajaxTransition"=>"random"]);
-		$dt->setUrls(["edit"=>"td3/tag/update"]);
-		$dt->setTargetSelector("#update-tag");
+
+        $dt->addEditDeleteButtons(false, [ "ajaxTransition" => "random","hasLoader"=>false ], function ($bt) {
+            $bt->addClass("circular");
+        }, function ($bt) {
+            $bt->addClass("circular");
+        });
+        $dt->onPreCompile(function () use (&$dt) {
+            $dt->getHtmlComponent()->colRight(1);
+        });
+        $dt->setUrls(["edit"=>"developers/edit","delete"=>"developers/confirmDelete"]);
+		$dt->setUrls(["edit"=>"tags/edit","delete"=>"tags/confirmDelete"]);
+		$dt->setTargetSelector("#frm");
 		return $dt;
 	}
 
-	public function frm(Tag $tag){
-		$colors=Color::getConstants();
-		$frm=$this->_semantic->dataForm("frm-tag", $tag);
-		$frm->setFields(["id","title","color","submit","cancel"]);
-		$frm->setCaptions(["","Title","Color","Valider","Annuler"]);
-		$frm->fieldAsHidden("id");
-		$frm->fieldAsInput("title",["rules"=>["empty","maxLength[30]"]]);
-		$frm->fieldAsDropDown("color",\array_combine($colors,$colors));
-		$frm->setValidationParams(["on"=>"blur","inline"=>true]);
-		$frm->onSuccess("$('#frm-tag').hide();");
-		$frm->fieldAsSubmit("submit","positive","td3/tag/submit", "#dt-tags",["ajax"=>["attr"=>"","jqueryDone"=>"replaceWith"]]);
-		$frm->fieldAsLink("cancel",["class"=>"ui button cancel"]);
-		$this->click(".cancel","$('#frm-tag').hide();");
-		$frm->addSeparatorAfter("color");
-		return $frm;
-	}
+	public function dataForm($tags,$type,$di=null){
+        $df=$this->_semantic->dataForm("frm-".$type,$tags);
+        $df->setFields(["title\n","id\n","tilte"]);
+        $df->setCaptions(["Modification","","Title"]);
+        $df->fieldAsMessage(0,["icon"=>"info circle"]);
+        $df->fieldAsHidden(1);
+        $df->fieldAsInput("title",["rules"=>"empty"]);
+        $df->setValidationParams(["on"=>"blur","inline"=>true]);
+        $df->setSubmitParams("tags/update","#frm",["attr"=>"","hasLoader"=>false]);
+        return $df;
+    }
 }
 
