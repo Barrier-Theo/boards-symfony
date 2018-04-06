@@ -19,7 +19,7 @@ class TagsController extends CrudController {
         $this->type="tags";
         $this->subHeader="tag list";
         $this->icon="tag";
-    }
+}
     /**
      * @Route("/tags", name="tags")
      */
@@ -52,7 +52,7 @@ class TagsController extends CrudController {
      * @Route("/tags/update", name="tags_update")
      */
     public function update(Request $request){
-        return $this->_update($request, "\App\Entity\Tag");
+        return $this->_update($request,"\App\Entity\Tag");
     }
 
 
@@ -85,7 +85,7 @@ class TagsController extends CrudController {
   /*  public function tags(TagsGui $gui,TagRepository $tagRepo){
     	$tags=$tagRepo->findAll();
     	$gui->dataTable($tags,'tags');
-    	return $gui->renderView('Tags/td3/index.html.twig');;
+    	return $gui->renderView('tags/td3/index.html.twig');;
     }
 
     /**
@@ -93,7 +93,7 @@ class TagsController extends CrudController {
      */
     /* public function update(Tag $tag,TagsGui $tagsGui){
     	$tagsGui->frm($tag);
-    	return $tagsGui->renderView('Tags/td3/frm.html.twig');
+    	return $tagsGui->renderView('tags/td3/frm.html.twig');
     }
 
     /**

@@ -1,8 +1,6 @@
 <?php 
 namespace App\Services\semantic;
 
-
-
 class DevelopersGui extends SemanticGui{
 	
 	public function dataTable($developers,$type){

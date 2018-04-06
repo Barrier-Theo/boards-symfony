@@ -14,7 +14,7 @@ use Ajax\semantic\html\elements\HtmlButton;
 class ProjectsGui extends SemanticGui{
 
 	public function buttons(){
-		$bts=$this->_semantic->htmlButtonGroups("bts",["Projects","Tags"]);
+		$bts=$this->_semantic->htmlButtonGroups("bts",["Projects","tags"]);
 		$bts->setPropertyValues("data-url", ["projects","tags"]);
 		$bts->addIcons(["folder","tags"]);
 		$bts->getOnClick("td3","#response",["attr"=>"data-url"]);
@@ -57,6 +57,8 @@ class ProjectsGui extends SemanticGui{
 	
 	public function dataForm($project,$type,$di=null){
 		$df=$this->_semantic->dataForm("frm-".$type,$project);
+		//test
+		$project->idOwner =  "";
 		if($project->getOwner()!=null){
 			$project->idOwner=$project->getOwner()->getId();
 		}
