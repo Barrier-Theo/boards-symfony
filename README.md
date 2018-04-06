@@ -6,6 +6,9 @@ Listage des instances dans une table
 Suppression
 Modification 
 Ajout
+=>> sauf pour task
+
+L'index de la page est codé en dur et non fonctionnelle.
 
 
 ## Prerequisites
